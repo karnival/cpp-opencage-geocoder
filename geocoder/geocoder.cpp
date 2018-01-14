@@ -14,8 +14,8 @@ Geocoder::Geocoder() {
 	}
 }
 
-Geocoder::Geocoder(std::string api_key) {
-	api_key = api_key;
+Geocoder::Geocoder(std::string key) {
+	api_key = key;
 }
 
 std::string Geocoder::geocode(std::string query) {

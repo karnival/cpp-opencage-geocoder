@@ -8,5 +8,8 @@ int main(void) {
 
 	std::cout << g->geocode("52.516,13.378") << std::endl;
 
+	g->output_format = Geocoder::OutputFormat::XML;
+	std::cout << g->geocode("52.516,13.378") << std::endl;
+
 	return 0;
 }

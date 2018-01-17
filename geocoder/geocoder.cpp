@@ -18,37 +18,6 @@ Geocoder::Geocoder(std::string key) {
 	api_key = key;
 }
 
-std::string Geocoder::get_format_string() {
-	switch(output_format) {
-		case OutputFormat::JSON:
-			return "json";
-			break;
-		case OutputFormat::GEOJSON:
-			return "geojson";
-			break;
-		case OutputFormat::XML:
-			return "xml";
-			break;
-		case OutputFormat::MAP:
-			return "map";
-			break;
-		case OutputFormat::GOOGLE_JSON:
-			return "google-v3-json";
-			break;
-	}
-}
-
-std::string Geocoder::get_bounds_string() {
-	if(use_bounds) {
-		return std::to_string(bounds[0]) + "," +\
-			std::to_string(bounds[1]) + "," +\
-			std::to_string(bounds[2]) + "," +\
-			std::to_string(bounds[3]);
-	} else {
-		std::cerr << "Bounds are not being used (use_bounds==false)." << std::endl;
-	}
-}
-
 std::string Geocoder::geocode(std::string query) {
 	std::string base_url = "https://api.opencagedata.com/geocode/v1/";
 	base_url += get_format_string(); // append data format, e.g. json
@@ -82,5 +51,36 @@ std::string Geocoder::geocode(std::string query) {
 	auto r = cpr::Get(cpr::Url{base_url}, params);
 
 	return r.text;
+}
+
+std::string Geocoder::get_format_string() {
+	switch(output_format) {
+		case OutputFormat::JSON:
+			return "json";
+			break;
+		case OutputFormat::GEOJSON:
+			return "geojson";
+			break;
+		case OutputFormat::XML:
+			return "xml";
+			break;
+		case OutputFormat::MAP:
+			return "map";
+			break;
+		case OutputFormat::GOOGLE_JSON:
+			return "google-v3-json";
+			break;
+	}
+}
+
+std::string Geocoder::get_bounds_string() {
+	if(use_bounds) {
+		return std::to_string(bounds[0]) + "," +\
+			std::to_string(bounds[1]) + "," +\
+			std::to_string(bounds[2]) + "," +\
+			std::to_string(bounds[3]);
+	} else {
+		std::cerr << "Bounds are not being used (use_bounds==false)." << std::endl;
+	}
 }
 

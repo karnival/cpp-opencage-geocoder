@@ -9,10 +9,10 @@ class Geocoder {
 		Geocoder(std::string api_key);
 
 		std::string geocode(std::string query);
-		std::string get_format_string();
 		
 		enum class OutputFormat {JSON, GEOJSON, XML, MAP, GOOGLE_JSON}; 
 		OutputFormat output_format = OutputFormat::JSON;
+		std::string get_format_string();
 
 		// Boolean query parameters always used, defaults as when unspecified.
 		bool no_annotations = true;
@@ -26,6 +26,8 @@ class Geocoder {
 		void set_bounds(float bounds[4]);
 		void set_countrycode(std::string code);
 		void set_language(std::string langugage);
+
+		std::string get_bounds_string();
 
 	private:
 		std::string api_key;

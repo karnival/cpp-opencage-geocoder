@@ -38,14 +38,49 @@ std::string Geocoder::get_format_string() {
 	}
 }
 
+std::string Geocoder::get_bounds_string() {
+	if(use_bounds) {
+		return std::to_string(bounds[0]) + "," +\
+			std::to_string(bounds[1]) + "," +\
+			std::to_string(bounds[2]) + "," +\
+			std::to_string(bounds[3]);
+	} else {
+		std::cerr << "Bounds are not being used (use_bounds==false)." << std::endl;
+	}
+}
+
 std::string Geocoder::geocode(std::string query) {
 	std::string base_url = "https://api.opencagedata.com/geocode/v1/";
 	base_url += get_format_string(); // append data format, e.g. json
 
-	auto r = cpr::Get(cpr::Url{base_url},
-			  cpr::Parameters{{"q", query},
-			  		  {"key", api_key},
-					  {"no_annotations", std::to_string(no_annotations)}});
+	auto params = cpr::Parameters{
+					{"q", query},
+					{"key", api_key},
+					{"no_annotations", std::to_string(no_annotations)},
+					{"abbrv", std::to_string(abbrv)},
+					{"no_dedupe", std::to_string(no_dedupe)},
+					{"no_record", std::to_string(no_record)},
+					{"pretty", std::to_string(pretty)}
+					};
+
+	if(use_min_confidence) {
+		params.AddParameter({"min_confidence", min_confidence});
+	}
+
+	if(use_bounds) {
+		params.AddParameter({"bounds", get_bounds_string()});
+	}
+
+	if(use_countrycode) {
+		params.AddParameter({"countrycode", countrycode});
+	}
+
+	if(use_language) {
+		params.AddParameter({"language", language});
+	}
+
+	auto r = cpr::Get(cpr::Url{base_url}, params);
+
 	return r.text;
 }
 

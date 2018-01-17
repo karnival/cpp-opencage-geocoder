@@ -25,8 +25,10 @@ make
 ### Functionality
 * ~~Implement geocoding.~~
 * ~~Implement reverse geocoding.~~
-* Implement alternative output formats (XML).
-* Add more geocoding options.
+* ~~Implement alternative output formats (XML).~~
+* ~~Add more geocoding options.~~
+* Check and handle return code and headers.
+* Add more thorough tests.
 
 ### Build
 * Make build backwards-compatible with older CMake versions.

@@ -19,7 +19,7 @@ Geocoder::Geocoder(std::string key) {
 }
 
 std::string Geocoder::geocode(std::string query) {
-	auto r = cpr::Get(cpr::Url{"http://api.opencagedata.com/geocode/v1/json"},
+	auto r = cpr::Get(cpr::Url{"https://api.opencagedata.com/geocode/v1/json"},
 			  cpr::Parameters{{"q", query},
 			  		  {"key", api_key},
 					  {"no_annotations", std::to_string(no_annotations)}});

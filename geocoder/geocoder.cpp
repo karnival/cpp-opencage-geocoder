@@ -84,3 +84,24 @@ std::string Geocoder::get_bounds_string() {
 	}
 }
 
+// Setters for non-default query parameters.
+void Geocoder::set_min_confidence(int min_confidence) {
+	Geocoder::use_min_confidence = true;
+	Geocoder::min_confidence = min_confidence;
+}
+
+void Geocoder::set_bounds(float bounds[4]) {
+	Geocoder::use_bounds = true;
+	*Geocoder::bounds = *bounds;
+}
+
+void Geocoder::set_countrycode(std::string countrycode) {
+	Geocoder::use_countrycode = true;
+	Geocoder::countrycode = countrycode;
+}
+
+void Geocoder::set_language(std::string language) {
+	Geocoder::use_language = true;
+	Geocoder::language = language;
+}
+

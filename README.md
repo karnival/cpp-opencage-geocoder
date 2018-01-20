@@ -1,8 +1,9 @@
 # cpp-opencage-geocoder
 A modern C++ library to access the [OpenCage geocoder](https://opencagedata.com/).
 
-## Features
-Coming soon. In a nutshell, geocoding and reverse geocoding.
+Geocoding and reverse geocoding all over the world, with options for bounding boxes, language, etc. Uses the [OpenCage geocoding API](https://geocoder.opencagedata.com/api). 
+
+Example usage shown in `geocoder/example.cpp`.
 
 ## Installation
 Build is via CMake, and requires a C++11-compatible compiler. The main dependency is the [C++ Requests](https://github.com/whoshuu/cpr) library, which is currently added via a git submodule. C++ Requests depends upon libcurl – by default our build requires you to have libcurl present on your own system.
@@ -27,13 +28,11 @@ make
 * ~~Implement reverse geocoding.~~
 * ~~Implement alternative output formats (XML).~~
 * ~~Add more geocoding options.~~
-* Check and handle return code and headers.
-* Add more thorough tests.
+* ~~Check and handle return code and headers.~~
 
 ### Build
 * Make build backwards-compatible with older CMake versions.
 * Integrate C++ Requests submodule into project as a subtree.
-* ~~Tidy build outputs.~~
 * Document building with libcurl, tests, etc.
 
 ## License

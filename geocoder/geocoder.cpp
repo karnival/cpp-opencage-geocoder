@@ -32,19 +32,19 @@ std::string Geocoder::geocode(std::string query) {
 					{"pretty", std::to_string(pretty)}
 					};
 
-	if(use_min_confidence) {
+	if(min_confidence != 0) {
 		params.AddParameter({"min_confidence", std::to_string(min_confidence)});
 	}
 
-	if(use_bounds) {
-		params.AddParameter({"bounds", get_bounds_string()});
+	if(bounds != "") {
+		params.AddParameter({"bounds", bounds});
 	}
 
-	if(use_countrycode) {
+	if(countrycode != "") {
 		params.AddParameter({"countrycode", countrycode});
 	}
 
-	if(use_language) {
+	if(language != "") {
 		params.AddParameter({"language", language});
 	}
 
@@ -72,36 +72,3 @@ std::string Geocoder::get_format_string() {
 			break;
 	}
 }
-
-std::string Geocoder::get_bounds_string() {
-	if(use_bounds) {
-		return std::to_string(bounds[0]) + "," +\
-			std::to_string(bounds[1]) + "," +\
-			std::to_string(bounds[2]) + "," +\
-			std::to_string(bounds[3]);
-	} else {
-		std::cerr << "Bounds are not being used (use_bounds==false)." << std::endl;
-	}
-}
-
-// Setters for non-default query parameters.
-void Geocoder::set_min_confidence(int min_confidence) {
-	Geocoder::use_min_confidence = true;
-	Geocoder::min_confidence = min_confidence;
-}
-
-void Geocoder::set_bounds(float bounds[4]) {
-	Geocoder::use_bounds = true;
-	*Geocoder::bounds = *bounds;
-}
-
-void Geocoder::set_countrycode(std::string countrycode) {
-	Geocoder::use_countrycode = true;
-	Geocoder::countrycode = countrycode;
-}
-
-void Geocoder::set_language(std::string language) {
-	Geocoder::use_language = true;
-	Geocoder::language = language;
-}
-

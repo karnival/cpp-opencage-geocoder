@@ -21,28 +21,16 @@ class Geocoder {
 		bool no_record = false;
 		bool pretty = false;
 
-		// Setters for non-default parameters.
-		void set_min_confidence(int confidence);
-		void set_bounds(float bounds[4]);
-		void set_countrycode(std::string code);
-		void set_language(std::string langugage);
-
-		std::string get_bounds_string();
+		// Query parameters not used by default.
+		unsigned int limit = 0;
+		unsigned int min_confidence = 0;
+		std::string language = "";
+		std::string bounds = "";
+		std::string countrycode = "";
 
 	private:
 		std::string api_key;
 
-		// Query parameters not used by default.
-		bool use_min_confidence = false;
-		bool use_bounds = false;
-		bool use_countrycode = false;
-		bool use_language = false;
-
-		std::string language = "";
-		int limit = 0;
-		int min_confidence = 0;
-		float bounds[4] = {0.0, 0.0, 0.0, 0.0};
-		std::string countrycode = "";
 
 };
 

@@ -29,7 +29,7 @@ make
 * ~~Check and handle return code and headers.~~
 
 ### Build
-* Make build backwards-compatible with older CMake versions.
+* ~~Make build backwards-compatible with older CMake versions.~~
 * ~~Integrate C++ Requests submodule into project as a subtree.~~
 
 ## License

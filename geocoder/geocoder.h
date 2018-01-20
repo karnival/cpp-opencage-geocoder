@@ -9,6 +9,7 @@ class Geocoder {
 		Geocoder(std::string api_key);
 
 		std::string geocode(std::string query);
+		std::string geocode_bounds(std::string query, std::string bounds);
 		
 		enum class OutputFormat {JSON, GEOJSON, XML, MAP, GOOGLE_JSON}; 
 		OutputFormat output_format = OutputFormat::JSON;

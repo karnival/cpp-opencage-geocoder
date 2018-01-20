@@ -21,5 +21,8 @@ int main(void) {
 	g->bounds = "-1.0,51.0,1.0,52.0";
 	std::cout << g->geocode("Buckingham Palace") << std::endl;
 
+	g->bounds = "";
+	std::cout << g->geocode_bounds("Buckingham Palace", "-1.0,51.0,1.0,52.0") << std::endl;
+
 	return 0;
 }

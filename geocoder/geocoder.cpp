@@ -53,6 +53,17 @@ std::string Geocoder::geocode(std::string query) {
 	return r.text;
 }
 
+std::string Geocoder::geocode_bounds(std::string query, std::string bounds) {
+	// Geocode within some user-specified bounds for a single query.
+	auto bounds_old = Geocoder::bounds;
+	Geocoder::bounds = bounds;
+
+	auto result = Geocoder::geocode(query);
+
+	Geocoder::bounds = bounds_old;
+	return result;
+}
+
 std::string Geocoder::get_format_string() {
 	switch(output_format) {
 		case OutputFormat::JSON:

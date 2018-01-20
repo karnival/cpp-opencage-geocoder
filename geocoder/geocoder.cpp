@@ -33,7 +33,7 @@ std::string Geocoder::geocode(std::string query) {
 					};
 
 	if(use_min_confidence) {
-		params.AddParameter({"min_confidence", min_confidence});
+		params.AddParameter({"min_confidence", std::to_string(min_confidence)});
 	}
 
 	if(use_bounds) {

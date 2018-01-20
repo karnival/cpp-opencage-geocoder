@@ -50,7 +50,27 @@ std::string Geocoder::geocode(std::string query) {
 		params.AddParameter({"language", language});
 	}
 
+	// This is the actual GET request.
 	auto r = cpr::Get(cpr::Url{base_url}, params);
+
+	// Handle different return codes.
+	if (r.status_code == 400) {
+		std::cerr << "ERROR: invalid query";
+	} else if(r.status_code == 402) {
+		std::cerr << "ERROR: quota exceeded";
+	} else if (r.status_code == 403) {
+		std::cerr << "ERROR: invalid or missing API key";
+	} else if (r.status_code == 404) {
+		std::cerr << "ERROR: invalid API endpoint";
+	} else if (r.status_code == 408) {
+		std::cerr << "ERROR: timeout, feel free to try again";
+	} else if (r.status_code == 410) {
+		std::cerr << "ERROR: request too long";
+	} else if (r.status_code == 429) {
+		std::cerr << "ERROR: too many requests, rate limit exceeded";
+	} else if (r.status_code == 503) {
+		std::cerr << "ERROR: server error";
+	}
 
 	return r.text;
 }

@@ -10,7 +10,7 @@ Geocoder::Geocoder() {
 	if(const char* env_key = std::getenv("OPENCAGE_API_KEY")) {
 		api_key = (std::string) env_key;
 	} else {
-		std::cerr << "Could not load API key." << std::endl;
+		throw std::runtime_error("could not load API key");
 	}
 }
 
@@ -54,22 +54,27 @@ std::string Geocoder::geocode(std::string query) {
 	auto r = cpr::Get(cpr::Url{base_url}, params);
 
 	// Handle different return codes.
-	if (r.status_code == 400) {
-		std::cerr << "ERROR: invalid query";
+	if(r.status_code == 400) {
+		throw std::runtime_error("400: invalid query");
 	} else if(r.status_code == 402) {
-		std::cerr << "ERROR: quota exceeded";
-	} else if (r.status_code == 403) {
-		std::cerr << "ERROR: invalid or missing API key";
-	} else if (r.status_code == 404) {
-		std::cerr << "ERROR: invalid API endpoint";
-	} else if (r.status_code == 408) {
-		std::cerr << "ERROR: timeout, feel free to try again";
-	} else if (r.status_code == 410) {
-		std::cerr << "ERROR: request too long";
-	} else if (r.status_code == 429) {
-		std::cerr << "ERROR: too many requests, rate limit exceeded";
-	} else if (r.status_code == 503) {
-		std::cerr << "ERROR: server error";
+		try {
+			std::string reset_time = r.header.at("X-RateLimit-Reset");
+			throw std::runtime_error("402: quota exceeded, will reset at " + reset_time);
+		} catch (std::out_of_range) {
+			throw std::runtime_error("402: quota exceeded, but could not find when it will reset");
+		}
+	} else if(r.status_code == 403) {
+		throw std::runtime_error("403: invalid or missing API key");
+	} else if(r.status_code == 404) {
+		throw std::runtime_error("404: invalid API endpoint");
+	} else if(r.status_code == 408) {
+		throw std::runtime_error("408: timeout, feel free to try again");
+	} else if(r.status_code == 410) {
+		throw std::runtime_error("410: request too long");
+	} else if(r.status_code == 429) {
+		throw std::runtime_error("429: too many requests, rate limit exceeded");
+	} else if(r.status_code == 503) {
+		throw std::runtime_error("503: server error");
 	}
 
 	return r.text;

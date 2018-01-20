@@ -22,6 +22,7 @@ std::string Geocoder::geocode(std::string query) {
 	std::string base_url = "https://api.opencagedata.com/geocode/v1/";
 	base_url += get_format_string(); // append data format, e.g. json
 
+	// Default params.
 	auto params = cpr::Parameters{
 					{"q", query},
 					{"key", api_key},
@@ -32,6 +33,7 @@ std::string Geocoder::geocode(std::string query) {
 					{"pretty", std::to_string(pretty)}
 					};
 
+	// Non-default params.
 	if(min_confidence != 0) {
 		params.AddParameter({"min_confidence", std::to_string(min_confidence)});
 	}

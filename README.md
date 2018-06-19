@@ -1,7 +1,7 @@
 # cpp-opencage-geocoder
 A modern C++ library to access the [OpenCage geocoder](https://opencagedata.com/).
 
-Geocoding and reverse geocoding all over the world, with options for bounding boxes, language, etc. Uses the [OpenCage geocoding API](https://geocoder.opencagedata.com/api). 
+Geocoding and reverse geocoding all over the world, with options for bounding boxes, language, etc. Uses the [OpenCage geocoding API](https://opencagedata.com/api). 
 
 Example usage shown in `geocoder/example.cpp`.
 
